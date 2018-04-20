@@ -4,7 +4,17 @@ var io = require('socket.io')(http) //require socket.io module and pass the http
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
 var pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
+var cssHeaders = {'Content-Type': 'text/css'};
+var commonHeaders = {'Content-Type': 'text/html'};
 
+
+function css(request, response) {
+  if (request.url === '/styles.css') {
+    response.writeHead(200, {'Content-type' : 'text/css'});
+    var fileContents = fs.readFileSync('./views/styles.css', {encoding: 'utf8'});
+    response.write(fileContents);
+  }
+}  
 
 http.listen(8080, '172.21.255.90'); //listen to port 80
 function handler (req, res) { //create server
