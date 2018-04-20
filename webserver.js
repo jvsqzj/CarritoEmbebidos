@@ -4,10 +4,11 @@ var io = require('socket.io')(http) //require socket.io module and pass the http
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
 var pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
-app.use(express.static('/public'));
+
 
 http.listen(8080, '172.21.255.90'); //listen to port 80
 function handler (req, res) { //create server
+  router.css(request, response);
   fs.readFile(__dirname + '/public/index.html', function(err, data) { //read file index.html in public folder
     if (err) {
       res.writeHead(404, {'Content-Type': 'text/html'}); //display 404 on error
