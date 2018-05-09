@@ -1,6 +1,5 @@
 
 var express = require('express');
-var pressController = require('./controllers/pressController');
 var socket = require('socket.io');
 var os = require('os');
 var replacestream = require('replacestream');
@@ -105,7 +104,7 @@ io.on('connection', function(socket){
 
     socket.on('orientation',function(data){
         var stream = getStream(data.sender,'orientation');
-        //console.log(' ' + data.beta + "\n");
+        console.log(' ' + data.beta + "\n");
     });
 });
 

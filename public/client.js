@@ -27,7 +27,7 @@ var streaming = true;
 
 
 if (window.DeviceMotionEvent !== undefined) {
-    window.ondevicemotion = function(e) {
+ /*   window.ondevicemotion = function(e) {
     if (!streaming) return false;
     socket.emit('motion', {
         //'sender':sendingId.value,
@@ -35,7 +35,7 @@ if (window.DeviceMotionEvent !== undefined) {
         'interval':e.interval,
         'rotationRate':e.rotationRate        
     });
-    };
+    };*/
     window.ondeviceorientation = function(e) {
     if (!streaming) return false;
     socket.emit('orientation', {
