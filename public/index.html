@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" http-equiv="Content-Type" content="width=device-width"; charset="UTF-8" />
+    <meta name="viewport" http-equiv="Content-Type" content="width=device-width, user-scalable=no"; charset="UTF-8" />
     <title>CarritoEmbebido</title>
 		<link rel="stylesheet" href="assets/style.css">
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js'></script> <!-- include socket.io client side script -->
@@ -10,11 +10,25 @@
 	<body>
 
 <b1>
-    <img style="-webkit-user-select: none;" src="http://172.21.255.144:4747/video" width="800" height="600">
+    <img id='video' style="-webkit-user-select: none;" src="http://172.21.255.144:4747/video" width="800" height="600">
 </b1>  
 		<h1>Control LED light</h1>
-		<p><input type="checkbox" id="light"></p>
-		<script src='client.js'></script> <!-- include socket.io client side script -->
+		<div>
+			<input id='videoid' placeholder="Insert webcam ip..." type="text">
+			<button id='enter'>Enter!</button>
+		</div>
+		<p>
+			
+			<input type="button" value='left' id="left" onclick="io.connect('http://192.168.1.9:8080');">
+			<input type="button" value='right' id="right">
+		
+		</p>
+
+		<p>
+			<input type="button" value='back' id="back">
+			<input type="button" value='fwd' id="fwd">
+		</p>
+		<script src='client.js'></script> 
 </html>
 	</body>
 	</html>>
