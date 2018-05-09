@@ -4,31 +4,28 @@
 <head>
     <meta name="viewport" http-equiv="Content-Type" content="width=device-width, user-scalable=no"; charset="UTF-8" />
     <title>CarritoEmbebido</title>
-		<link rel="stylesheet" href="assets/style.css">
+		<link rel="stylesheet" href="assets/styles.css">
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js'></script> <!-- include socket.io client side script -->
   </head>
 	<body>
 
 <b1>
-    <img id='video' style="-webkit-user-select: none;" src="http://172.21.255.144:4747/video" width="800" height="600">
+    
 </b1>  
-		<h1>Control LED light</h1>
-		<div>
+		<div id='gather'>
 			<input id='videoid' placeholder="Insert webcam ip..." type="text">
-			<button id='enter'>Enter!</button>
+			<input type="button" id='enter' value='Enter'>
 		</div>
-		<p>
-			
-			<input type="button" value='left' id="left" onclick="io.connect('http://192.168.1.9:8080');">
-			<input type="button" value='right' id="right">
 		
-		</p>
-
-		<p>
-			<input type="button" value='back' id="back">
-			<input type="button" value='fwd' id="fwd">
-		</p>
+		<input type="button" value='back' id="back" display='inline-block'>
+		
+		<div class='display'>
+			<img id='video' style="-webkit-user-select: none;" src="http://172.21.255.144:4747/video" width="320" height="240">
+		</div>
+		
+		<input type="button" value='fwd' id="fwd">
+		
 		<script src='client.js'></script> 
 </html>
 	</body>
-	</html>>
+	</html>

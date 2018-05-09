@@ -16,6 +16,7 @@ enter.addEventListener('click', function(){
 
 socket.on('update', function(data){
     video.src = 'http://' + data + ':4747/video';
+    document.getElementById('gather').remove();
 });
 
 document.addEventListener('DOMContentLoaded', function(){

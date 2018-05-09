@@ -20,6 +20,10 @@ body{
   clear: both;
 }
 
+.display{
+  float: left;
+}
+
 input[type="text"]{
   width: 70%;
   padding: 20px;
@@ -30,9 +34,9 @@ input[type="text"]{
   color: #989898;
 }
 
-button{
+input{
   padding: 20px;
-  width: 30%;
+  width: 15%;
   float: left;
   background: #23282e;
   border: 0;
