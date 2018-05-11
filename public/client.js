@@ -17,10 +17,6 @@ enter.addEventListener('click', function(){
     socket.emit('ip', ip.value);
 });
 
-document.onload(function(){
-    
-});
-
 socket.on('update', function(data){
     video.src = 'http://' + data + ':4747/video';
     document.getElementById('gather').remove();
