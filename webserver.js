@@ -6,12 +6,16 @@ var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
 var pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
 var cssHeaders = {'Content-Type': 'text/css'};
 var commonHeaders = {'Content-Type': 'text/html'};
-var L_red = new Gpio(0, 'out');
-var L_black = new Gpio(2, 'out');
-var R_red = new Gpio(3, 'out');
-var R_black = new Gpio(5, 'out');
-
-
+//var L_red = new Gpio(0, 'out');
+//var L_black = new Gpio(2, 'out');
+//var R_red = new Gpio(3, 'out');
+//var R_black = new Gpio(5, 'out');
+var L_red = new pwm.PWM('GPIO18');
+var L_black = new pwm.PWM('GPIO23');
+var R_red = new pwm.PWM('GPIO24');
+var R_black = new pwm.PWM('GPIO25');
+var raspi = require('raspi');
+var pwm = require('raspi-pwm');
 
 function css(request, response) {
   if (request.url === '/styles.css') {
@@ -61,36 +65,46 @@ process.on('SIGINT', function () { //on ctrl+c
 });
 
 function forward(){
-  L_red.pwmwrite(1);
-  R_red.pwmwrite(1);
-  L_black.pwmwrite(0);
-  R_black.pwmwrite(0);
+  raspi.init(() => {
+    L_red.write(1);
+    R_red.write(1);
+    L_black.write(0);
+    R_black.write(0);
+  })
 }
 
 function backward(){
-  L_red.pwmwrite(0);
-  R_red.pwmwrite(1);
-  L_black.pwmwrite(0);
-  R_black.pwmwrite(1);  
+  raspi.init(() => {
+    L_red.write(0);
+    R_red.write(1);
+    L_black.write(0);
+    R_black.write(1);
+  })
 }
 
 function right(){
-  L_red.pwmwrite(1);
-  R_red.pwmwrite(0);
-  L_black.pwmwrite(0);
-  R_black.pwmwrite(1);  //  o ponerlo en cero
+  raspi.init(() => {
+    L_red.write(1);
+    R_red.write(0);
+    L_black.write(0);
+    R_black.write(1);   //  o ponerlo en cero
+  })
 }
 
 function left(){
-  L_red.pwmwrite(0);
-  R_red.pwmwrite(1);
-  L_black.pwmwrite(1);  //  o ponerlo en cero
-  R_black.pwmwrite(0);  
+  raspi.init(() => {
+    L_red.write(0);
+    R_red.write(1);
+    L_black.write(1);   //  o ponerlo en cero
+    R_black.write(0);   
+  })
 }
 
 function stop(){
-  L_red.pwmwrite(0);
-  R_red.pwmwrite(0);
-  L_black.pwmwrite(0); 
-  R_black.pwmwrite(0); 
+  raspi.init(() => {
+    L_red.write(0);
+    R_red.write(0);
+    L_black.write(0);   //  o ponerlo en cero
+    R_black.write(0);   
+  })
 }
