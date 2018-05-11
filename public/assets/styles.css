@@ -176,3 +176,15 @@
 
   div.validator {
   }
+
+  .arriba {
+    display: inline-block;  /* para modificar sus margenes internos */
+    padding: 20px;
+    background: #024959;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
