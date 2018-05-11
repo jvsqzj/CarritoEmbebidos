@@ -1,7 +1,10 @@
+//import { loadavg } from "os";
 
 //Make connection
 
-var socket = io.connect('http://192.168.1.9:8080');
+var serverip = document.URL;
+console.log(serverip);
+var socket = io.connect(serverip);
 
 //Query DOM
 
@@ -12,6 +15,10 @@ var ip = document.getElementById('videoid'),
 //Emit event
 enter.addEventListener('click', function(){
     socket.emit('ip', ip.value);
+});
+
+document.onload(function(){
+    
 });
 
 socket.on('update', function(data){
