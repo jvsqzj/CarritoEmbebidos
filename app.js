@@ -94,7 +94,6 @@ io.on('connection', function(socket){
     console.log('New socket connection made at', socket.id);
     socket.on('ip', function(data){
         console.log(data);
-        
         socket.emit('update', data);
     });
 
