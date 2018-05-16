@@ -1,4 +1,4 @@
-var L_red = new pwm.PWM('GPIO18');
+/*var L_red = new pwm.PWM('GPIO18');
 var L_black = new pwm.PWM('GPIO23');
 var R_red = new pwm.PWM('GPIO24');
 var R_black = new pwm.PWM('GPIO25');
@@ -48,4 +48,42 @@ function forward(){
       L_black.write(0);   //  o ponerlo en cero
       R_black.write(0);   
     })
+  }*/
+
+var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
+var L_red = new Gpio(4, 'out');
+/* var L_black = new Gpio(4, 'out'); //use GPIO pin 4 as output
+var R_red = new Gpio(6, 'out');
+var R_black = new Gpio(7, 'out'); */
+
+function forward(){
+  if (L_red.readSync() === 0) {
+    L_red.writeSync(1);
+  } else {
+    L_red.writeSync(0);
   }
+/*   R_red.writeSync(1);
+  L_black.writeSync(0);
+  R_black.writeSync(0); */
+  console.log('Se mueve hacia adelante');
+}
+
+//forward();
+
+/* function sayHi(){
+  console.log('hi');
+}
+
+sayHi();
+
+var sayBye = function(){
+  console.log('bye');
+}
+
+sayBye(); */
+
+/* var counter = function(arr){
+  return 'There are ' + arr.length + ' elements in this array';
+};
+
+console.log(counter(['shkjhk', 'fsfadf', 'rqwerq'])); */

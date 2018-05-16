@@ -10,12 +10,7 @@ var commonHeaders = {'Content-Type': 'text/html'};
 //var L_black = new Gpio(2, 'out');
 //var R_red = new Gpio(3, 'out');
 //var R_black = new Gpio(5, 'out');
-var L_red = new pwm.PWM('GPIO18');
-var L_black = new pwm.PWM('GPIO23');
-var R_red = new pwm.PWM('GPIO24');
-var R_black = new pwm.PWM('GPIO25');
-var raspi = require('raspi');
-var pwm = require('raspi-pwm');
+
 
 function css(request, response) {
   if (request.url === '/styles.css') {
