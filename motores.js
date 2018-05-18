@@ -52,21 +52,51 @@ function forward(){
 
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 var L_red = new Gpio(4, 'out');
-/* var L_black = new Gpio(4, 'out'); //use GPIO pin 4 as output
+var L_black = new Gpio(5, 'out'); //use GPIO pin 4 as output
 var R_red = new Gpio(6, 'out');
-var R_black = new Gpio(7, 'out'); */
+var R_black = new Gpio(7, 'out');
 
 function forward(){
-  if (L_red.readSync() === 0) {
-    L_red.writeSync(1);
-  } else {
-    L_red.writeSync(0);
-  }
-/*   R_red.writeSync(1);
+  L_red.writeSync(1);
+  R_red.writeSync(1);
   L_black.writeSync(0);
-  R_black.writeSync(0); */
+  R_black.writeSync(0);
   console.log('Se mueve hacia adelante');
 }
+
+function backward(){
+  L_red.writeSync(0);
+  R_red.writeSync(0);
+  L_black.writeSync(1);
+  R_black.writeSync(1);
+  console.log('Se mueve hacia atrás');
+}
+
+function right(){
+  L_red.writeSync(1);
+  R_red.writeSync(0);
+  L_black.writeSync(0);
+  R_black.writeSync(0);
+  console.log('Se mueve hacia la derecha');
+}
+
+function left(){
+  L_red.writeSync(0);
+  R_red.writeSync(1);
+  L_black.writeSync(0);
+  R_black.writeSync(0);
+  console.log('Se mueve hacia la izquierda');
+}
+
+function stop(){
+  L_red.writeSync(0);
+  R_red.writeSync(0);
+  L_black.writeSync(0);
+  R_black.writeSync(0);
+  console.log('Se detuvo');
+}
+
+
 
 //forward();
 
