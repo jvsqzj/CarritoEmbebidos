@@ -1,70 +1,38 @@
-/*var L_red = new pwm.PWM('GPIO18');
-var L_black = new pwm.PWM('GPIO23');
-var R_red = new pwm.PWM('GPIO24');
-var R_black = new pwm.PWM('GPIO25');
-var raspi = require('raspi');
-var pwm = require('raspi-pwm');
+var gpio = require("gpio");
 
-function forward(){
-    raspi.init(() => {
-      L_red.write(1);
-      R_red.write(1);
-      L_black.write(0);
-      R_black.write(0);
-    })
-  }
-  
-  function backward(){
-    raspi.init(() => {
-      L_red.write(0);
-      R_red.write(1);
-      L_black.write(0);
-      R_black.write(1);
-    })
-  }
-  
-  function right(){
-    raspi.init(() => {
-      L_red.write(1);
-      R_red.write(0);
-      L_black.write(0);
-      R_black.write(1);   //  o ponerlo en cero
-    })
-  }
-  
-  function left(){
-    raspi.init(() => {
-      L_red.write(0);
-      R_red.write(1);
-      L_black.write(1);   //  o ponerlo en cero
-      R_black.write(0);   
-    })
-  }
-  
-  function stop(){
-    raspi.init(() => {
-      L_red.write(0);
-      R_red.write(0);
-      L_black.write(0);   //  o ponerlo en cero
-      R_black.write(0);   
-    })
-  }*/
+var _open = function(pin, fn) { return gpio.export(pin, {ready: fn}); };
 
-var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-var L_red = new Gpio(4, 'out');
-var L_black = new Gpio(5, 'out'); //use GPIO pin 4 as output
-var R_red = new Gpio(6, 'out');
-var R_black = new Gpio(7, 'out');
+var _close = function(pin, fn) {
+	if(typeof pin === "number") {
+		gpio.unexport(pin, fn);
+	} else if(typeof pin === "object") {
+		pin.unexport(fn);
+	}
+};
 
-function forward(){
-  L_red.writeSync(1);
+var car = function(opts) {
+
+	opts = opts || {};
+	if(typeof opts.L_red !== "number") opts.L_red = 17;
+	if(typeof opts.L_black !== "number") opts.L_black = 18;
+	if(typeof opts.R_red !== "number") opts.R_red = 22;
+	if(typeof opts.R_black !== "number") opts.R_black = 23;
+
+	this.L_red = _open(opts.L_red);
+	this.L_black = _open(opts.L_black);
+	this.R_red = _open(opts.R_red);
+	this.R_black = _open(opts.R_black, opts.ready);
+};
+
+car.prototype.forward = function() {
+	L_red.writeSync(1);
   R_red.writeSync(1);
   L_black.writeSync(0);
   R_black.writeSync(0);
   console.log('Se mueve hacia adelante');
-}
+};
 
-function backward(){
+car.prototype.backward = function() {
   L_red.writeSync(0);
   R_red.writeSync(0);
   L_black.writeSync(1);
@@ -72,7 +40,7 @@ function backward(){
   console.log('Se mueve hacia atrás');
 }
 
-function right(){
+car.prototype.right = function (){
   L_red.writeSync(1);
   R_red.writeSync(0);
   L_black.writeSync(0);
@@ -80,7 +48,7 @@ function right(){
   console.log('Se mueve hacia la derecha');
 }
 
-function left(){
+car.prototype.left = function (){
   L_red.writeSync(0);
   R_red.writeSync(1);
   L_black.writeSync(0);
@@ -88,7 +56,7 @@ function left(){
   console.log('Se mueve hacia la izquierda');
 }
 
-function stop(){
+car.prototype.stop = function (){
   L_red.writeSync(0);
   R_red.writeSync(0);
   L_black.writeSync(0);
@@ -96,24 +64,4 @@ function stop(){
   console.log('Se detuvo');
 }
 
-
-
-//forward();
-
-/* function sayHi(){
-  console.log('hi');
-}
-
-sayHi();
-
-var sayBye = function(){
-  console.log('bye');
-}
-
-sayBye(); */
-
-/* var counter = function(arr){
-  return 'There are ' + arr.length + ' elements in this array';
-};
-
-console.log(counter(['shkjhk', 'fsfadf', 'rqwerq'])); */
+exports.init = function(opts){ return new RC(opts); };
