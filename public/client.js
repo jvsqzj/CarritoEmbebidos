@@ -12,7 +12,17 @@ var ip = document.getElementById('videoid'),
     enter = document.getElementById('enter'),
     video = document.getElementById('video');
 
+
+var fwdb = document.getElementById('fwd');
+var backb = document.getElementById('back');
+
 //Emit event
+fwdb.addEventListener('click', function(){
+    socket.emit('fwd');
+});
+backb.addEventListener('click', function(){
+    socket.emit('back');
+});
 enter.addEventListener('click', function(){
     socket.emit('ip', ip.value);
 });
