@@ -5,6 +5,7 @@ var os = require('os');
 var replacestream = require('replacestream');
 var fs = require('fs');
 var path = require('path');
+var car = require('./motores.js').init();
 //var mail = require('nodemailer');
 
 //Read server ip
@@ -76,9 +77,23 @@ io.on('connection', function(socket){
         console.log(data);
     });
 
+    socket.on('fwd', function(){
+        car.forward();
+    });
+
+    socket.on('back', function(){
+        car.backward();
+    });
+
     socket.on('orientation',function(data){
         var stream = getStream(data.sender,'orientation');
-        console.log(' ' + data.beta + "\n");
+        //console.log(' ' + data.beta + "\n");
+        if(data.beta < -10){
+            car.left();
+        }
+        else if (data.beta > 10){
+            car.right();
+        }
     });
 });
 
