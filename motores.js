@@ -13,10 +13,10 @@ var _close = function(pin, fn) {
 var car = function(opts) {
 
 	opts = opts || {};
-	if(typeof opts.L_red !== "number") opts.L_red = 17;
-	if(typeof opts.L_black !== "number") opts.L_black = 18;
-	if(typeof opts.R_red !== "number") opts.R_red = 22;
-	if(typeof opts.R_black !== "number") opts.R_black = 23;
+	if(typeof opts.L_red !== "number") opts.L_red = 17;         //  Se conecta a B1B
+	if(typeof opts.L_black !== "number") opts.L_black = 18;     //  Se conecta a A1A
+	if(typeof opts.R_red !== "number") opts.R_red = 22;         //  Se conecta a B1A
+	if(typeof opts.R_black !== "number") opts.R_black = 23;     //  Se conecta a A1B
 
 	this.L_red = _open(opts.L_red);
 	this.L_black = _open(opts.L_black);
