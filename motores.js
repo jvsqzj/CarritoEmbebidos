@@ -25,43 +25,43 @@ var car = function(opts) {
 };
 
 car.prototype.forward = function() {
-	L_red.writeSync(1);
-  R_red.writeSync(1);
-  L_black.writeSync(0);
-  R_black.writeSync(0);
-  console.log('Se mueve hacia adelante');
+	this.L_red.set();
+	this.R_red.set();
+	this.L_black.set(0);
+	this.R_black.set(0);
+	console.log('Se mueve hacia adelante');
 };
 
 car.prototype.backward = function() {
-  L_red.writeSync(0);
-  R_red.writeSync(0);
-  L_black.writeSync(1);
-  R_black.writeSync(1);
+  this.L_red.set(0);
+  this.R_red.set(0);
+  this.L_black.set();
+  this.R_black.set();
   console.log('Se mueve hacia atrás');
 }
 
 car.prototype.right = function (){
-  L_red.writeSync(1);
-  R_red.writeSync(0);
-  L_black.writeSync(0);
-  R_black.writeSync(0);
+  this.L_red.set();
+  this.R_red.set(0);
+  this.L_black.set(0);
+  this.R_black.set(0);
   console.log('Se mueve hacia la derecha');
 }
 
 car.prototype.left = function (){
-  L_red.writeSync(0);
-  R_red.writeSync(1);
-  L_black.writeSync(0);
-  R_black.writeSync(0);
+  this.L_red.set(0);
+  this.R_red.set();
+  this.L_black.set(0);
+  this.R_black.set(0);
   console.log('Se mueve hacia la izquierda');
 }
 
 car.prototype.stop = function (){
-  L_red.writeSync(0);
-  R_red.writeSync(0);
-  L_black.writeSync(0);
-  R_black.writeSync(0);
+  this.L_red.set(0);
+  this.R_red.set(0);
+  this.L_black.set(0);
+  this.R_black.set(0);
   console.log('Se detuvo');
 }
 
-exports.init = function(opts){ return new RC(opts); };
+exports.init = function(opts){ return new car(opts); };

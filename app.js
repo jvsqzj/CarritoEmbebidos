@@ -24,31 +24,6 @@ var ip = ips.filter(function(d) {
 })[0];
 var port = 8080;
 
-//Mailing, experimental
-/*
-let transport = {
-    host: 'smtp.live.com',
-    port: 587,
-    secure: false, // upgrade later with STARTTLS
-    auth: {
-        user: 'vasquez-12@live.com',
-        pass: 'dF8gsn96FlCa'
-    }
-};
-
-var message = {
-    from: 'vasquez-12@gmail.com',
-    to: 'jvsqzj@gmail.com',
-    subject: 'Connecto to ' + ip,
-    text: 'Connect to this!',
-    html: '<p><a href=http://'+ ip + ':8080</p>'
-};
-
-let transporter = mail.createTransport(transport);
-
-transporter.sendMail(message);
-*/
-
 //App setup
 var app = express();
 
