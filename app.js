@@ -6,6 +6,7 @@ var replacestream = require('replacestream');
 var fs = require('fs');
 var path = require('path');
 var car = require('./motores.js').init();
+var bot = require('./bot.js');
 //var mail = require('nodemailer');
 
 //Read server ip
