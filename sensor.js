@@ -1,20 +1,21 @@
-var five = require("johnny-five");
-var board = new five.Board();
+var tessel = require('tessel');
+var gpio = tessel.port.GPIO;
+// The trigger pin can be any GPIO
+var triggerPin = gpio.digital[1];
+// The echo pin MUST be G3 on the GPIO bank
+var echoPin = gpio.digital[2];
 
-board.on("ready", function() {
-  var proximity = new five.Proximity({
-    controller: "HCSR04",
-    pin: 7
-  });
+var proxLib = require('../');
+var proximity = proxLib.use(triggerPin, echoPin);
 
-  proximity.on("data", function() {
-    console.log("Proximity: ");
-    console.log("  cm  : ", this.cm);
-    console.log("  in  : ", this.in);
-    console.log("-----------------");
-  });
+function printDistance() {
+  proximity.getDistance(function(err, distance) {
+    if (err) throw err;
 
-  proximity.on("change", function() {
-    console.log("The obstruction has moved.");
+    console.log("Distance: ", distance, "cm away.");
+
+    printDistance();
   });
-});
+}
+
+printDistance();
