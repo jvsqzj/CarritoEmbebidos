@@ -9,8 +9,11 @@
   "dependencies": {
     "express": "^4.16.3",
     "gpio": "^0.2.7",
+    "johnny-five": "^0.15.0",
+    "mmm-usonic": "^2.5.3",
     "node-telegram-bot-api": "^0.30.0",
     "onoff": "^3.1.0",
+    "proximity-hcsr04": "^0.1.0",
     "replacestream": "^4.0.3",
     "semaphore": "^1.1.0",
     "socket.io": "^2.1.0",
