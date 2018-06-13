@@ -4,8 +4,10 @@ var Gpio = require('pigpio').Gpio,
 
 // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
 var MICROSECDONDS_PER_CM = 1e6/34321;
+var dist = 1000;
 
 trigger.digitalWrite(0); // Make sure trigger is low
+
 
 (function () {
   var startTick;
@@ -19,6 +21,7 @@ trigger.digitalWrite(0); // Make sure trigger is low
     } else {
       endTick = tick;
       diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic
+      dist = diff / 2 / MICROSECDONDS_PER_CM;
       console.log(diff / 2 / MICROSECDONDS_PER_CM);
     }
   });
@@ -28,3 +31,5 @@ trigger.digitalWrite(0); // Make sure trigger is low
 setInterval(function () {
   trigger.trigger(10, 1); // Set trigger high for 10 microseconds
 }, 1000);
+
+exports.init = {dist};

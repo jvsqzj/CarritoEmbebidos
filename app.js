@@ -47,6 +47,25 @@ app.use(express.static('public'));
 
 const spawn = require('threads').spawn;
 var status = 0;
+
+const thread = spawn(function(status, done) {
+    // Everything we do here will be run in parallel in another execution context.
+    // Remember that this function will be executed in the thread's context,
+    // so you cannot reference any value of the surrounding code.
+    //var sens = require('./sensor.js');
+    while(true){
+    /*
+        INSERTAR RUTINA DE LEER SENSOR
+    */
+        if(){
+            sem.take(status, function(){
+                status = 0;
+                sem.leave();
+            });
+        };
+    };
+    done({ string : input.string, integer : parseInt(input.string) });
+});
  
 const thread = spawn(function(status, done) {
     // Everything we do here will be run in parallel in another execution context.
