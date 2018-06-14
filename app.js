@@ -53,11 +53,13 @@ const thread = spawn(function(status, done) {
     // Remember that this function will be executed in the thread's context,
     // so you cannot reference any value of the surrounding code.
     //var sens = require('./sensor.js');
+    var sens = require('./sensor.js');
     while(true){
     /*
         INSERTAR RUTINA DE LEER SENSOR
     */
-        if(){
+    var cercania = sens.dist;
+        if(cercania < 0.09){
             sem.take(status, function(){
                 status = 0;
                 sem.leave();

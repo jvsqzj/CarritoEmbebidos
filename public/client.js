@@ -15,8 +15,12 @@ var ip = document.getElementById('videoid'),
 
 var fwdb = document.getElementById('fwd');
 var backb = document.getElementById('back');
+var stopb = document.getElementById('stop');
 
 //Emit event
+stopb.addEventListener('click', function(){
+    socket.emit('stp');
+});
 fwdb.addEventListener('click', function(){
     socket.emit('fwd');
 });
